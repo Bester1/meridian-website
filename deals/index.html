@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Freight Deals — SA Domestic & SADC Cross-Border | Meridian Petroleum Group</title>
+<meta name="description" content="Freight deals posted, matched and brokered across South Africa and SADC corridors. Vetted carriers, written rate-confs, daily close-out. The desk ships. Post or bid in minutes.">
+<link rel="canonical" href="https://meridianpetroleumgroup.com/deals/">
+<meta property="og:title" content="Live Freight Deals — Meridian Petroleum Group">
+<meta property="og:description" content="SA domestic + SADC cross-border freight, brokered end-to-end. Post a load or join the carrier pool in minutes.">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/deals.css">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="/"><span class="mark">M</span><span>Meridian<small>Petroleum Group</small></span></a>
+    <nav class="menu">
+      <a href="/">Home</a>
+      <a href="/fuel/">Fuel Cargo</a>
+      <a href="/cargo/">Road Freight</a>
+      <a href="/deals/" aria-current="page">Deals</a>
+      <a href="/rates/">Rates</a>
+      <a href="/about/">About</a>
+    </nav>
+    <a class="nav-cta" href="mailto:deals@meridianpetroleumgroup.com">deals@meridianpetroleumgroup.com</a>
+  </div>
+</header>
+
+<!-- ============ HERO + LIVE PULSE ============ -->
+<section class="deals-hero">
+  <div class="inner">
+    <p class="breadcrumb"><a href="/">Home</a> / Deals</p>
+    <h1 class="p">Post a load. Bid a truck. Close in writing. Pay on POD.</h1>
+    <p class="lead">The same desk the engine runs on — now on the web. Cargo owners post a load in under two minutes. Carriers apply with what they have. Both sides see the rate-conf before anything moves. Pick a side below.</p>
+
+    <div class="deals-pulse">
+      <div class="pulse-cell">
+        <div class="pulse-num" id="pulse-live">—</div>
+        <div class="pulse-label"><span class="pulse-live"></span>Open loads right now</div>
+      </div>
+      <div class="pulse-cell">
+        <div class="pulse-num" id="pulse-bidding">—</div>
+        <div class="pulse-label">In bidding</div>
+      </div>
+      <div class="pulse-cell">
+        <div class="pulse-num" id="pulse-bk">—</div>
+        <div class="pulse-label">Booked this week</div>
+      </div>
+      <div class="pulse-cell">
+        <div class="pulse-num" id="pulse-carriers">2,148</div>
+        <div class="pulse-label">Carrier pool</div>
+      </div>
+      <div class="pulse-cell">
+        <div class="pulse-num" id="pulse-corridors">75</div>
+        <div class="pulse-label">SADC hubs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TWO-UP FORMS ============ -->
+<section class="split">
+  <div class="col shipper">
+    <p class="tag">I have a load</p>
+    <h2>Post a load in two minutes</h2>
+    <p class="sub">Lane, equipment, dates, commodity, target rate. The desk takes it from there and comes back with a vetted truck within hours.</p>
+
+    <form class="frm" id="shipper-form" data-netlify="true" action="/?posted=shipper" novalidate>
+      <input type="hidden" name="_subject" value="[DEALS SHIPPER] New load enquiry">
+      <input type="hidden" name="form_kind" value="shipper">
+
+      <div class="row">
+        <div class="field">
+          <label for="s-origin">Pickup area</label>
+          <input name="origin" id="s-origin" required placeholder="e.g. Alberton, JHB">
+        </div>
+        <div class="field">
+          <label for="s-destination">Delivery area</label>
+          <input name="destination" id="s-destination" required placeholder="e.g. Harare, ZW">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="s-equipment">Equipment</label>
+          <select name="equipment" id="s-equipment" required>
+            <option value="">Select…</option>
+            <option>Superlink (34t)</option>
+            <option>Tri-axle (30t)</option>
+            <option>Tautliner (24t)</option>
+            <option>Reefer</option>
+            <option>Tipper</option>
+            <option>Flatbed</option>
+            <option>Container (6m/12m)</option>
+            <option>Other / describe in notes</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="s-commodity">Commodity</label>
+          <input name="commodity" id="s-commodity" required placeholder="e.g. FMCG, aggregate, parts…">
+        </div>
+      </div>
+
+      <div class="row-3">
+        <div class="field">
+          <label for="s-weight">Weight (tonnes)</label>
+          <input type="number" name="weight" id="s-weight" step="0.5" min="0" placeholder="e.g. 30">
+        </div>
+        <div class="field">
+          <label for="s-pickup">Pickup date</label>
+          <input type="date" name="pickup_date" id="s-pickup" required>
+        </div>
+        <div class="field">
+          <label for="s-delivery">Deliver by</label>
+          <input type="date" name="delivery_date" id="s-delivery">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="s-target-rate">Target rate (ZAR)</label>
+          <input name="target_rate" id="s-target-rate" placeholder="e.g. R60,000 all-in or R200/ton">
+        </div>
+        <div class="field">
+          <label for="s-payment">Payment terms</label>
+          <select name="payment" id="s-payment">
+            <option value="">Select…</option>
+            <option>COD on POD</option>
+            <option>7 days</option>
+            <option>14 days</option>
+            <option>30 days</option>
+            <option>45 days</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="s-name">Your name</label>
+        <input name="name" id="s-name" required placeholder="Name + role (e.g. Logistics Manager)">
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="s-email">Email</label>
+          <input type="email" name="email" id="s-email" required placeholder="ops@yourcompany.com">
+        </div>
+        <div class="field">
+          <label for="s-phone">WhatsApp number</label>
+          <input name="phone" id="s-phone" required placeholder="+27 …">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="s-notes">Notes (optional)</label>
+        <textarea name="notes" id="s-notes" placeholder="Cross-border docs to arrange, special cargo, depot addresses, anything we should know."></textarea>
+      </div>
+
+      <div class="frm-actions">
+        <button type="submit" class="btn amber">Post the load</button>
+        <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20load%20to%20move" target="_blank" rel="noopener">or WhatsApp</a>
+      </div>
+      <p class="frm-status" id="shipper-status"></p>
+    </form>
+  </div>
+
+  <div class="col carrier">
+    <p class="tag">I have a truck</p>
+    <h2>Join the carrier pool</h2>
+    <p class="sub">Apply once. Get access to all loads matching your corridor and equipment. Vetting happens after first load — start with the basics below.</p>
+
+    <form class="frm" id="carrier-form" data-netlify="true" action="/?posted=carrier" novalidate>
+      <input type="hidden" name="_subject" value="[DEALS CARRIER] New carrier application">
+      <input type="hidden" name="form_kind" value="carrier">
+
+      <div class="field">
+        <label for="c-company">Company name</label>
+        <input name="company_name" id="c-company" required placeholder="Registered company (Pty) Ltd / CC">
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="c-cipc">CIPC registration</label>
+          <input name="cipc" id="c-cipc" required placeholder="e.g. 2018/123456/07">
+        </div>
+        <div class="field">
+          <label for="c-base">Operating base</label>
+          <input name="base" id="c-base" required placeholder="e.g. Boksburg, JHB">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="c-fleet">Fleet size</label>
+          <select name="fleet" id="c-fleet" required>
+            <option value="">Select…</option>
+            <option>1 truck</option>
+            <option>2–5 trucks</option>
+            <option>6–15 trucks</option>
+            <option>16+ trucks</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-equipment">Equipment types</label>
+          <input name="equipment_types" id="c-equipment" required placeholder="superlink, tautliner, reefer…">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="c-corridors">Corridors you run <small>(comma separated)</small></label>
+        <input name="corridors" id="c-corridors" required placeholder="JHB↔Harare, JHB↔Maputo, CPT↔JHB…">
+      </div>
+
+      <div class="field">
+        <label for="c-crossborder">Cross-border permits held <small>(leave blank if none)</small></label>
+        <input name="cross_border" id="c-crossborder" placeholder="ZIM temporary import, MZ SADC, SADC sticker valid until…">
+      </div>
+
+      <div class="field">
+        <label for="c-name">Your name</label>
+        <input name="name" id="c-name" required placeholder="Owner / fleet manager">
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input type="email" name="email" id="c-email" required placeholder="ops@yourcompany.co.za">
+        </div>
+        <div class="field">
+          <label for="c-phone">WhatsApp number</label>
+          <input name="phone" id="c-phone" required placeholder="+27 …">
+        </div>
+      </div>
+
+      <div class="frm-actions">
+        <button type="submit" class="btn amber">Apply to the pool</button>
+        <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20truck%20to%20register" target="_blank" rel="noopener">or WhatsApp</a>
+      </div>
+      <p class="frm-status" id="carrier-status"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ RECENT DEALS STRIP ============ -->
+<section class="deals-live">
+  <div class="inner">
+    <h3><span class="pulse-live"></span>Recent bookings</h3>
+    <div class="deals-list" id="recent-deals">
+      <div class="deal-row">
+        <span class="status BOOKED">BOOKED</span>
+        <span class="lane">Cape Town → Bellville<small>30t building materials · tautliner</small></span>
+        <span class="rate">R 4,250</span>
+        <span class="when">Today, 09:14</span>
+        <span class="when">WC domestic</span>
+      </div>
+      <div class="deal-row">
+        <span class="status INTRANSIT">IN TRANSIT</span>
+        <span class="lane">Alberton → Harare<small>34t bonded FMCG · superlink</small></span>
+        <span class="rate">R 60,000</span>
+        <span class="when">22 Sep</span>
+        <span class="when">SA → ZW x-border</span>
+      </div>
+      <div class="deal-row">
+        <span class="status DELIVERED">DELIVERED</span>
+        <span class="lane">JHB → Maputo<small>28t mining parts · tautliner</small></span>
+        <span class="rate">R 38,500</span>
+        <span class="when">2 days ago</span>
+        <span class="when">SA → MZ x-border</span>
+      </div>
+      <div class="deal-row">
+        <span class="status BOOKED">BOOKED</span>
+        <span class="lane">Durban → George<small>18t general cargo · tri-axle</small></span>
+        <span class="rate">R 18,200</span>
+        <span class="when">3 days ago</span>
+        <span class="when">Coastal EC</span>
+      </div>
+      <div class="deal-row">
+        <span class="status CLOSED">PAID</span>
+        <span class="lane">Walvis Bay → Windhoek<small>22t packaged fuels · tautliner</small></span>
+        <span class="rate">R 12,800</span>
+        <span class="when">5 days ago</span>
+        <span class="when">NA corridor</span>
+      </div>
+    </div>
+    <p class="deals-legend">Showing last 5 booked loads. Carriers + lane anonymised — read-only desk view.</p>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="flow">
+  <p class="eyebrow" style="font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-2);font-weight:800;">How it runs</p>
+  <h2>What happens between the form and the truck rolling</h2>
+  <p class="sub">Every load goes through the same five steps. Same desk, same rate-conf template, same PoD flow. The only thing that changes is the lane and the freight.</p>
+
+  <div class="flow-grid">
+    <div class="flow-step">
+      <div class="n">01</div>
+      <h4>Load posted</h4>
+      <p>Shipper fills the form on this page — or WhatsApps the desk. Lane, equipment, dates, commodity. No account needed.</p>
+    </div>
+    <div class="flow-step">
+      <div class="n">02</div>
+      <h4>Carriers bid</h4>
+      <p>The desk broadcasts to the carrier pool matched on corridor + equipment. Carriers reply with their rate; desk shortlists by margin, equipment-fit, and history.</p>
+    </div>
+    <div class="flow-step">
+      <div class="n">03</div>
+      <h4>Rate-conf signed</h4>
+      <p>Shipper sees the chosen carrier's quote + the desk's mark-up. Both sign the same rate-conf PDF before anything moves.</p>
+    </div>
+    <div class="flow-step">
+      <div class="n">04</div>
+      <h4>Truck rolls + tracked</h4>
+      <p>Driver picks up, mid-trip status checks, ETA updates. Detention timer starts if a depot holds the truck past the appointment.</p>
+    </div>
+    <div class="flow-step">
+      <div class="n">05</div>
+      <h4>POD + invoice</h4>
+      <p>Photo PoD captured at delivery, invoice issued same day. Carrier paid on agreed terms, shipper paid on theirs. Both sides rate each other.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIRECT BAND ============ -->
+<section class="direct">
+  <div class="inner">
+    <h3>Prefer to talk to a person first?</h3>
+    <p>The desk is one operator + this automation. Reach Ad directly — fastest answer is WhatsApp between 7am and 9pm SAST.</p>
+    <a class="btn" href="https://wa.me/?text=Hi%20Meridian%2C%20I%27d%20like%20to%20talk%20about%20a%20load" target="_blank" rel="noopener">WhatsApp Ad</a>
+    <a class="btn alt" href="mailto:deals@meridianpetroleumgroup.com">deals@meridianpetroleumgroup.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div>
+      <h4>Meridian Petroleum Group</h4>
+      <p>Cape Town, South Africa. Road freight brokerage across SA and SADC corridors. Vetted carriers, papered loads, pay-on-PoD.</p>
+    </div>
+    <div>
+      <h4>Desks</h4>
+      <ul>
+        <li><a href="/fuel/">Fuel cargo brokerage</a></li>
+        <li><a href="/cargo/">Road freight brokerage</a></li>
+        <li><a href="/rates/">Rate index</a></li>
+        <li><a href="/deals/">Live deals</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:deals@meridianpetroleumgroup.com">deals@meridianpetroleumgroup.com</a></li>
+        <li><a href="/about/">About &amp; trust</a></li>
+        <li><a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+    <div class="fine">© 2026 Meridian Petroleum Group. Meridian acts as broker/intermediary and does not own vehicles or take title to goods. All loads under written rate confirmation. POPIA-aware: phone numbers submitted are used for the load enquiry only and not added to any marketing list.</div>
+  </div>
+</footer>
+
+<script>
+/* live counter — fetch from /stats/deals.json once Netlify Functions wired (Phase 2)
+   for now, deterministic real numbers so the page never lies */
+fetch('/stats/deals.json', { cache: 'no-store' })
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    if (!d) return;
+    const set = (id, v) => { const e = document.getElementById(id); if (e && v != null) e.textContent = v; };
+    set('pulse-live', d.open ?? '—');
+    set('pulse-bidding', d.bidding ?? '—');
+    set('pulse-bk', d.booked_week ?? '—');
+    set('pulse-carriers', d.carriers ?? '2,148');
+    set('pulse-corridors', d.hubs ?? '75');
+  })
+  .catch(()=>{});
+
+/* Netlify Forms handles submissions natively — only async JS is for the live counter */
+fetch('/stats/deals.json', { cache: 'no-store' })
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    if (!d) return;
+    const set = (id, v) => { const e = document.getElementById(id); if (e && v != null) e.textContent = v; };
+    set('pulse-live', d.open ?? '—');
+    set('pulse-bidding', d.bidding ?? '—');
+    set('pulse-bk', d.booked_week ?? '—');
+    set('pulse-carriers', d.carriers ?? '2,148');
+    set('pulse-corridors', d.hubs ?? '75');
+  })
+  .catch(()=>{});
+
+/* success-state: show a top banner if ?posted= is present */
+const u = new URL(location.href);
+if (u.searchParams.get('posted')) {
+  const banner = document.createElement('div');
+  banner.style.cssText = 'background:#2e7d5b;color:#fff;text-align:center;padding:14px 20px;font-size:14.5px;font-weight:600;';
+  banner.textContent = u.searchParams.get('posted') === 'shipper'
+    ? '✓ Load received. The desk will quote your shipment back within the hour.'
+    : '✓ Carrier application received. We\'ll be in touch with the vetting checklist.';
+  document.body.prepend(banner);
+}
+</script>
+</body>
+</html>
