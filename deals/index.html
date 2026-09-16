@@ -70,7 +70,9 @@
     <h2>Post a load in two minutes</h2>
     <p class="sub">Lane, equipment, dates, commodity, target rate. The desk takes it from there and comes back with a vetted truck within hours.</p>
 
-    <form class="frm" id="shipper-form" data-netlify="true" action="/?posted=shipper" novalidate>
+    <form class="frm" id="shipper-form" name="shipper-enquiry" method="POST" data-netlify="true" netlify-honeypot="company_website" action="/thanks/?posted=shipper" novalidate>
+        <input type="hidden" name="form-name" value="shipper-enquiry">
+        <p hidden><label>Leave this empty: <input name="company_website"></label></p>
       <input type="hidden" name="_subject" value="[DEALS SHIPPER] New load enquiry">
       <input type="hidden" name="form_kind" value="shipper">
 
@@ -173,7 +175,9 @@
     <h2>Join the carrier pool</h2>
     <p class="sub">Apply once. Get access to all loads matching your corridor and equipment. Vetting happens after first load — start with the basics below.</p>
 
-    <form class="frm" id="carrier-form" data-netlify="true" action="/?posted=carrier" novalidate>
+    <form class="frm" id="carrier-form" name="carrier-application" method="POST" data-netlify="true" netlify-honeypot="company_website" action="/thanks/?posted=carrier" novalidate>
+        <input type="hidden" name="form-name" value="carrier-application">
+        <p hidden><label>Leave this empty: <input name="company_website"></label></p>
       <input type="hidden" name="_subject" value="[DEALS CARRIER] New carrier application">
       <input type="hidden" name="form_kind" value="carrier">
 
@@ -366,6 +370,7 @@
 /* live counter — fetch from /stats/deals.json once Netlify Functions wired (Phase 2)
    for now, deterministic real numbers so the page never lies */
 fetch('/stats/deals.json', { cache: 'no-store' })
+  .then(function (r) { if (!r.ok) { throw new Error('no stats yet'); } return r; })
   .then(r => r.ok ? r.json() : null)
   .then(d => {
     if (!d) return;
@@ -380,6 +385,7 @@ fetch('/stats/deals.json', { cache: 'no-store' })
 
 /* Netlify Forms handles submissions natively — only async JS is for the live counter */
 fetch('/stats/deals.json', { cache: 'no-store' })
+  .then(function (r) { if (!r.ok) { throw new Error('no stats yet'); } return r; })
   .then(r => r.ok ? r.json() : null)
   .then(d => {
     if (!d) return;
