@@ -154,6 +154,23 @@
 
       <fieldset class="wiz-step" data-step="3">
         <legend>Who do we come back to?</legend>
+        <!-- The company, not just the person. Our published terms turn on it:
+             a first load is 50% on confirmation, an established account is 30
+             days from POD "once the company is CIPC-verified" — and until this
+             form asked for the company we could not apply our own terms to
+             anybody. The registration number is optional because a first-time
+             shipper should not be made to dig for it, but asking makes the
+             faster terms possible on the second load. -->
+        <div class="row">
+          <div class="field">
+            <label for="s-company">Company</label>
+            <input name="company_name" id="s-company" required placeholder="Who the invoice goes to">
+          </div>
+          <div class="field">
+            <label for="s-cipc">CIPC registration <small>(optional)</small></label>
+            <input name="shipper_cipc" id="s-cipc" placeholder="e.g. 2018/123456/07">
+          </div>
+        </div>
         <div class="field">
           <label for="s-name">Your name</label>
           <input name="name" id="s-name" required placeholder="Name and role">
