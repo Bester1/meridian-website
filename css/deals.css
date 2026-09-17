@@ -326,3 +326,132 @@
   font-size:.95rem;
   max-width:44rem;
 }
+
+/* --------------------------------------------------------------------------
+   The enquiry slip, taken one part at a time
+   --------------------------------------------------------------------------
+   A twenty-field form is a wall, and a wall on a phone is a bounce. So it is
+   read in three parts, the way a clerk fills a slip: the lane, the load, then
+   who to come back to.
+
+   Built as progressive enhancement, deliberately. With no JavaScript every
+   fieldset stays open and the marks stay hidden, so the form is one long slip
+   that still submits — and Netlify still sees every field at build time, which
+   is what registers the form at all. The wizard is an improvement on a working
+   form, never a requirement for one.
+   -------------------------------------------------------------------------- */
+
+/* A fieldset is a grouping element, not a box. Strip the browser's frame and
+   let it inherit the form's own rhythm. */
+.wiz-step{
+  border:0; padding:0; margin:0;
+  display:grid; gap:1.15rem;
+}
+.wiz-step > legend{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.18rem;
+  line-height:1.3;
+  color:var(--ink);
+  padding:0;
+  margin-bottom:.35rem;
+}
+
+/* The marks. Set as a clause list — letterspaced Franklin caps with roman
+   numerals, the same numbering the process lists use — under a single hairline
+   that the active mark sits on. Not a progress pill; this house does not have
+   pills. */
+.wiz-marks{
+  list-style:none;
+  counter-reset:wizmark;
+  display:flex; flex-wrap:wrap;
+  gap:0 1.6rem;
+  margin:0 0 1.9rem;
+  padding-bottom:.7rem;
+  border-bottom:1px solid var(--rule);
+}
+.wiz-marks li{
+  counter-increment:wizmark;
+  font-family:var(--grotesk);
+  font-size:.6rem; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:#A99E86;
+  padding-bottom:.7rem;
+  margin-bottom:-.7rem;          /* sit the underline on the group's rule */
+  border-bottom:2px solid transparent;
+  transition:color .2s ease, border-color .2s ease;
+}
+.wiz-marks li::before{
+  content:counter(wizmark, upper-roman) ". ";
+  font-family:var(--serif);
+  font-size:.82rem;
+  letter-spacing:0;
+  font-variant-numeric:lining-nums;
+}
+/* Done is ink, here is oxblood, still to come is quiet. Three states, because
+   "which of these have I already answered" is the question a multi-step form
+   has to answer without being asked. */
+.wiz-marks li[data-state="done"]{ color:var(--ink-soft) }
+.wiz-marks li[data-state="here"]{
+  color:var(--oxblood);
+  border-bottom-color:var(--oxblood);
+}
+
+.wiz-nav{
+  display:flex; align-items:center;
+  gap:1.2rem;
+  margin-top:.4rem;
+}
+.wiz-nav .wiz-where{
+  font-family:var(--grotesk);
+  font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--quiet);
+  margin-right:auto;
+}
+.wiz-next, .wiz-back{
+  font-family:var(--grotesk);
+  font-size:.69rem; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase;
+  padding:.72rem 1.5rem;
+  border:1px solid currentColor;
+  border-radius:0;
+  background:transparent;
+  cursor:pointer;
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.wiz-next{ background:var(--oxblood); color:var(--sheet); border-color:var(--oxblood) }
+.wiz-next:hover{ background:var(--ink); border-color:var(--ink) }
+.wiz-back{ color:var(--quiet); border-color:var(--rule-firm) }
+.wiz-back:hover{ color:var(--ink); border-color:var(--ink) }
+
+/* A field that was not filled in says so where the eye already is, rather than
+   scrolling the page to a browser bubble. */
+.field input[aria-invalid="true"],
+.field select[aria-invalid="true"],
+.field textarea[aria-invalid="true"]{
+  border-color:var(--oxblood);
+  background:#FFF8F5;
+}
+.field-error{
+  margin:.35rem 0 0;
+  font-family:var(--grotesk);
+  font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--oxblood);
+}
+.field-help{
+  margin:.4rem 0 0;
+  font-size:.88rem;
+  line-height:1.55;
+  color:var(--quiet);
+  max-width:34rem;
+}
+
+@media (max-width:640px){
+  .wiz-marks{ gap:0 1rem }
+  .wiz-marks li{ font-size:.55rem; letter-spacing:.14em }
+  .wiz-nav{ gap:.8rem }
+  .wiz-next, .wiz-back{ padding:.72rem 1.1rem }
+}
+@media (prefers-reduced-motion:reduce){
+  .wiz-marks li{ transition:none }
+}

@@ -66,101 +66,123 @@
     <h2>Post a load in two minutes</h2>
     <p class="sub">Lane, equipment, dates, commodity, target rate. The desk takes it from there and comes back with a vetted truck within hours.</p>
 
-    <form class="frm" id="shipper-form" name="shipper-enquiry" method="POST" data-netlify="true" netlify-honeypot="company_website" action="/thanks/?posted=shipper" novalidate>
+    <form class="frm wiz" id="shipper-form" name="shipper-enquiry" method="POST"
+      data-netlify="true" netlify-honeypot="company_website" action="/thanks/?posted=shipper" novalidate>
         <input type="hidden" name="form-name" value="shipper-enquiry">
         <p hidden><label>Leave this empty: <input name="company_website"></label></p>
       <input type="hidden" name="_subject" value="[DEALS SHIPPER] New load enquiry">
       <input type="hidden" name="form_kind" value="shipper">
 
-      <div class="row">
-        <div class="field">
-          <label for="s-origin">Pickup area</label>
-          <input name="origin" id="s-origin" required placeholder="e.g. Alberton, JHB">
-        </div>
-        <div class="field">
-          <label for="s-destination">Delivery area</label>
-          <input name="destination" id="s-destination" required placeholder="e.g. Harare, ZW">
-        </div>
-      </div>
+      <!-- The step marks. With JavaScript off these are hidden and every
+           fieldset below stays open, so the form is still one long slip that
+           submits correctly — the wizard is an improvement on it, not a
+           requirement for it. -->
+      <ol class="wiz-marks" aria-hidden="true" hidden>
+        <li data-step="1">The lane</li>
+        <li data-step="2">The load</li>
+        <li data-step="3">You</li>
+      </ol>
 
-      <div class="row">
-        <div class="field">
-          <label for="s-equipment">Equipment</label>
-          <select name="equipment" id="s-equipment" required>
-            <option value="">Select…</option>
-            <option>Superlink (34t)</option>
-            <option>Tri-axle (30t)</option>
-            <option>Tautliner (24t)</option>
-            <option>Reefer</option>
-            <option>Tipper</option>
-            <option>Flatbed</option>
-            <option>Container (6m/12m)</option>
-            <option>Other / describe in notes</option>
-          </select>
+      <fieldset class="wiz-step" data-step="1">
+        <legend>Where is it going?</legend>
+        <div class="row">
+          <div class="field">
+            <label for="s-origin">Pickup area</label>
+            <input name="origin" id="s-origin" required placeholder="e.g. Alberton, JHB">
+          </div>
+          <div class="field">
+            <label for="s-destination">Delivery area</label>
+            <input name="destination" id="s-destination" required placeholder="e.g. Harare, ZW">
+          </div>
         </div>
-        <div class="field">
-          <label for="s-commodity">Commodity</label>
-          <input name="commodity" id="s-commodity" required placeholder="e.g. FMCG, aggregate, parts…">
+        <div class="row">
+          <div class="field">
+            <label for="s-pickup">Pickup date</label>
+            <input type="date" name="pickup_date" id="s-pickup" required>
+          </div>
+          <div class="field">
+            <label for="s-delivery">Deliver by <small>(if it matters)</small></label>
+            <input type="date" name="delivery_date" id="s-delivery">
+          </div>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="row-3">
-        <div class="field">
-          <label for="s-weight">Weight (tonnes)</label>
-          <input type="number" name="weight" id="s-weight" step="0.5" min="0" placeholder="e.g. 30">
+      <fieldset class="wiz-step" data-step="2">
+        <legend>What are we moving?</legend>
+        <div class="row">
+          <div class="field">
+            <label for="s-equipment">Equipment</label>
+            <select name="equipment" id="s-equipment" required>
+              <option value="">Select…</option>
+              <option>Superlink (34t)</option>
+              <option>Tri-axle (30t)</option>
+              <option>Tautliner (24t)</option>
+              <option>Reefer</option>
+              <option>Tipper</option>
+              <option>Flatbed</option>
+              <option>Container (6m/12m)</option>
+              <option>Not sure — advise me</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="s-commodity">Commodity</label>
+            <input name="commodity" id="s-commodity" required placeholder="e.g. FMCG, aggregate, parts…">
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="s-weight">Weight <small>(tonnes)</small></label>
+            <input type="number" name="weight" id="s-weight" step="0.5" min="0" placeholder="e.g. 30">
+          </div>
+          <div class="field">
+            <label for="s-payment">Payment terms</label>
+            <select name="payment" id="s-payment">
+              <option value="">Select…</option>
+              <option>COD on POD</option>
+              <option>7 days</option>
+              <option>14 days</option>
+              <option>30 days</option>
+              <option>45 days</option>
+            </select>
+          </div>
         </div>
         <div class="field">
-          <label for="s-pickup">Pickup date</label>
-          <input type="date" name="pickup_date" id="s-pickup" required>
-        </div>
-        <div class="field">
-          <label for="s-delivery">Deliver by</label>
-          <input type="date" name="delivery_date" id="s-delivery">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="s-target-rate">Target rate (ZAR)</label>
+          <label for="s-target-rate">Target rate <small>(optional — tell us and we will tell you straight)</small></label>
           <input name="target_rate" id="s-target-rate" placeholder="e.g. R60,000 all-in or R200/ton">
         </div>
+      </fieldset>
+
+      <fieldset class="wiz-step" data-step="3">
+        <legend>Who do we come back to?</legend>
         <div class="field">
-          <label for="s-payment">Payment terms</label>
-          <select name="payment" id="s-payment">
-            <option value="">Select…</option>
-            <option>COD on POD</option>
-            <option>7 days</option>
-            <option>14 days</option>
-            <option>30 days</option>
-            <option>45 days</option>
-          </select>
+          <label for="s-name">Your name</label>
+          <input name="name" id="s-name" required placeholder="Name and role">
         </div>
-      </div>
-
-      <div class="field">
-        <label for="s-name">Your name</label>
-        <input name="name" id="s-name" required placeholder="Name + role (e.g. Logistics Manager)">
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="s-email">Email</label>
-          <input type="email" name="email" id="s-email" required placeholder="ops@yourcompany.com">
+        <div class="row">
+          <div class="field">
+            <label for="s-email">Email</label>
+            <input type="email" name="email" id="s-email" required placeholder="ops@yourcompany.com">
+          </div>
+          <div class="field">
+            <label for="s-phone">WhatsApp number</label>
+            <input name="phone" id="s-phone" required placeholder="+27 …">
+          </div>
         </div>
         <div class="field">
-          <label for="s-phone">WhatsApp number</label>
-          <input name="phone" id="s-phone" required placeholder="+27 …">
+          <label for="s-notes">Anything else <small>(optional)</small></label>
+          <textarea name="notes" id="s-notes" placeholder="Cross-border docs to arrange, depot addresses, special cargo."></textarea>
         </div>
-      </div>
+      </fieldset>
 
-      <div class="field">
-        <label for="s-notes">Notes (optional)</label>
-        <textarea name="notes" id="s-notes" placeholder="Cross-border docs to arrange, special cargo, depot addresses, anything we should know."></textarea>
+      <div class="wiz-nav" hidden>
+        <button type="button" class="wiz-back" hidden>Back</button>
+        <span class="wiz-where" aria-live="polite"></span>
+        <button type="button" class="wiz-next">Next</button>
       </div>
 
       <div class="frm-actions">
         <button type="submit" class="btn">Post the load</button>
-        <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20load%20to%20move" target="_blank" rel="noopener">or WhatsApp</a>
+        <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20load%20to%20move" target="_blank" rel="noopener">or WhatsApp it</a>
       </div>
       <p class="frm-status" id="shipper-status"></p>
     </form>
@@ -171,74 +193,103 @@
     <h2>Join the carrier pool</h2>
     <p class="sub">Apply once. Get access to all loads matching your corridor and equipment. Vetting happens after first load — start with the basics below.</p>
 
-    <form class="frm" id="carrier-form" name="carrier-application" method="POST" data-netlify="true" netlify-honeypot="company_website" action="/thanks/?posted=carrier" novalidate>
+    <form class="frm wiz" id="carrier-form" name="carrier-application" method="POST"
+      data-netlify="true" netlify-honeypot="company_website" action="/thanks/?posted=carrier" novalidate>
         <input type="hidden" name="form-name" value="carrier-application">
         <p hidden><label>Leave this empty: <input name="company_website"></label></p>
       <input type="hidden" name="_subject" value="[DEALS CARRIER] New carrier application">
       <input type="hidden" name="form_kind" value="carrier">
 
-      <div class="field">
-        <label for="c-company">Company name</label>
-        <input name="company_name" id="c-company" required placeholder="Registered company (Pty) Ltd / CC">
-      </div>
+      <ol class="wiz-marks" aria-hidden="true" hidden>
+        <li data-step="1">The company</li>
+        <li data-step="2">The trucks</li>
+        <li data-step="3">You</li>
+      </ol>
 
-      <div class="row">
+      <fieldset class="wiz-step" data-step="1">
+        <legend>Who are you?</legend>
         <div class="field">
-          <label for="c-cipc">CIPC registration</label>
-          <input name="cipc" id="c-cipc" required placeholder="e.g. 2018/123456/07">
+          <label for="c-company">Company name</label>
+          <input name="company_name" id="c-company" required placeholder="Registered company (Pty) Ltd / CC">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="c-cipc">CIPC registration</label>
+            <input name="cipc" id="c-cipc" required placeholder="e.g. 2018/123456/07">
+          </div>
+          <div class="field">
+            <label for="c-base">Operating base</label>
+            <input name="base" id="c-base" required placeholder="e.g. Boksburg, JHB">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="wiz-step" data-step="2">
+        <legend>What do you run, and where?</legend>
+        <div class="row">
+          <div class="field">
+            <label for="c-fleet">Fleet size</label>
+            <select name="fleet" id="c-fleet" required>
+              <option value="">Select…</option>
+              <option>1 truck</option>
+              <option>2–5 trucks</option>
+              <option>6–15 trucks</option>
+              <option>16+ trucks</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-equipment">Equipment types</label>
+            <input name="equipment_types" id="c-equipment" required placeholder="superlink, tautliner, reefer…">
+          </div>
         </div>
         <div class="field">
-          <label for="c-base">Operating base</label>
-          <input name="base" id="c-base" required placeholder="e.g. Boksburg, JHB">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="c-fleet">Fleet size</label>
-          <select name="fleet" id="c-fleet" required>
-            <option value="">Select…</option>
-            <option>1 truck</option>
-            <option>2–5 trucks</option>
-            <option>6–15 trucks</option>
-            <option>16+ trucks</option>
-          </select>
+          <label for="c-corridors">Corridors you actually run <small>(comma separated)</small></label>
+          <input name="corridors" id="c-corridors" required placeholder="JHB↔Harare, JHB↔Maputo, CPT↔JHB…">
+          <!-- This is the field that decides whether you get called about a
+               load. It is read as data, not as prose. -->
+          <p class="field-help">These go straight onto the desk. When a load matches a corridor you run, you come up first.</p>
         </div>
         <div class="field">
-          <label for="c-equipment">Equipment types</label>
-          <input name="equipment_types" id="c-equipment" required placeholder="superlink, tautliner, reefer…">
+          <label for="c-crossborder">Cross-border permits held <small>(leave blank if none)</small></label>
+          <input name="cross_border" id="c-crossborder" placeholder="ZIM temporary import, MZ SADC, SADC sticker valid until…">
         </div>
-      </div>
+      </fieldset>
 
-      <div class="field">
-        <label for="c-corridors">Corridors you run <small>(comma separated)</small></label>
-        <input name="corridors" id="c-corridors" required placeholder="JHB↔Harare, JHB↔Maputo, CPT↔JHB…">
-      </div>
-
-      <div class="field">
-        <label for="c-crossborder">Cross-border permits held <small>(leave blank if none)</small></label>
-        <input name="cross_border" id="c-crossborder" placeholder="ZIM temporary import, MZ SADC, SADC sticker valid until…">
-      </div>
-
-      <div class="field">
-        <label for="c-name">Your name</label>
-        <input name="name" id="c-name" required placeholder="Owner / fleet manager">
-      </div>
-
-      <div class="row">
+      <fieldset class="wiz-step" data-step="3">
+        <legend>Who do we call when a load fits?</legend>
         <div class="field">
-          <label for="c-email">Email</label>
-          <input type="email" name="email" id="c-email" required placeholder="ops@yourcompany.co.za">
+          <label for="c-name">Your name</label>
+          <input name="name" id="c-name" required placeholder="Owner / fleet manager">
         </div>
-        <div class="field">
-          <label for="c-phone">WhatsApp number</label>
-          <input name="phone" id="c-phone" required placeholder="+27 …">
+        <div class="row">
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input type="email" name="email" id="c-email" required placeholder="ops@yourcompany.co.za">
+          </div>
+          <div class="field">
+            <label for="c-phone">WhatsApp number</label>
+            <input name="phone" id="c-phone" required placeholder="+27 …">
+          </div>
         </div>
+        <!-- Said once, here, where it lands rather than buried in the intro:
+             the documents cannot come through a form, and pretending otherwise
+             wastes a round trip for both sides. -->
+        <p class="field-help">
+          Last thing, and it is not on this form: WhatsApp us a photo of your goods-in-transit
+          insurance certificate and your operating licence disc. Those we need as pictures, and
+          no carrier runs a load until they are on file.
+        </p>
+      </fieldset>
+
+      <div class="wiz-nav" hidden>
+        <button type="button" class="wiz-back" hidden>Back</button>
+        <span class="wiz-where" aria-live="polite"></span>
+        <button type="button" class="wiz-next">Next</button>
       </div>
 
       <div class="frm-actions">
-        <button type="submit" class="btn">Apply to the pool</button>
-        <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20truck%20to%20register" target="_blank" rel="noopener">or WhatsApp</a>
+        <button type="submit" class="btn">Join the pool</button>
+        <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20truck%20to%20register" target="_blank" rel="noopener">or WhatsApp us</a>
       </div>
       <p class="frm-status" id="carrier-status"></p>
     </form>
@@ -397,6 +448,116 @@ fetch('/stats/deals.json', { cache: 'no-store' })
     set('pulse-carriers', d.carriers_on_file);
   })
   .catch(() => {});
+
+/* --------------------------------------------------------------------------
+   The three-step slip
+   --------------------------------------------------------------------------
+   Progressive enhancement, and the order matters: the markup ships as one long
+   form that works on its own, and this collapses it. If this script never runs
+   -- blocked, failed, an old phone -- every fieldset stays open and the form
+   still submits every field. Netlify reads the fields out of the HTML at build
+   time either way, which is what registers the form at all.
+
+   Nothing is unmounted. Hidden fieldsets stay in the DOM and in the submission;
+   removing a step would drop its answers on the floor.
+   -------------------------------------------------------------------------- */
+document.querySelectorAll('form.wiz').forEach(function (form) {
+  var steps = Array.prototype.slice.call(form.querySelectorAll('.wiz-step'));
+  var marks = form.querySelector('.wiz-marks');
+  var nav = form.querySelector('.wiz-nav');
+  var back = form.querySelector('.wiz-back');
+  var next = form.querySelector('.wiz-next');
+  var where = form.querySelector('.wiz-where');
+  var actions = form.querySelector('.frm-actions');
+  if (steps.length < 2 || !nav || !next) { return; }
+
+  marks.hidden = false;
+  marks.removeAttribute('aria-hidden');
+  nav.hidden = false;
+  var at = 0;
+
+  function clearError(el) {
+    el.removeAttribute('aria-invalid');
+    var note = el.parentNode.querySelector('.field-error');
+    if (note) { note.remove(); }
+  }
+
+  /* Say what is missing, next to the thing that is missing. The browser's own
+     bubble points at the first invalid control even when it is inside a hidden
+     fieldset, which on a wizard means an error nobody can see. */
+  function validate(step) {
+    var bad = null;
+    step.querySelectorAll('input, select, textarea').forEach(function (el) {
+      clearError(el);
+      if (el.checkValidity()) { return; }
+      el.setAttribute('aria-invalid', 'true');
+      var note = document.createElement('p');
+      note.className = 'field-error';
+      note.textContent = el.validity.valueMissing
+        ? 'Needed before the next step'
+        : (el.validationMessage || 'Check this one');
+      el.parentNode.appendChild(note);
+      if (!bad) { bad = el; }
+    });
+    if (bad) { bad.focus({ preventScroll: false }); }
+    return !bad;
+  }
+
+  function render() {
+    steps.forEach(function (s, i) { s.hidden = i !== at; });
+    Array.prototype.forEach.call(marks.children, function (li, i) {
+      li.setAttribute('data-state', i === at ? 'here' : (i < at ? 'done' : 'todo'));
+    });
+    back.hidden = at === 0;
+    var last = at === steps.length - 1;
+    next.hidden = last;
+    /* The submit button only appears on the last step. A Post the load button
+       visible on step one is an invitation to submit a third of a form. */
+    actions.hidden = !last;
+    where.textContent = 'Step ' + (at + 1) + ' of ' + steps.length;
+  }
+
+  next.addEventListener('click', function () {
+    if (!validate(steps[at])) { return; }
+    at = Math.min(at + 1, steps.length - 1);
+    render();
+    steps[at].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+
+  back.addEventListener('click', function () {
+    at = Math.max(at - 1, 0);
+    render();
+  });
+
+  /* Enter should advance, not submit a form that is two thirds empty. */
+  form.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' || e.target.tagName === 'TEXTAREA') { return; }
+    if (at < steps.length - 1) { e.preventDefault(); next.click(); }
+  });
+
+  /* A field that is now filled should stop shouting immediately. */
+  form.addEventListener('input', function (e) {
+    if (e.target.getAttribute('aria-invalid') && e.target.checkValidity()) {
+      clearError(e.target);
+    }
+  });
+
+  /* Last line of defence: if a hidden step is somehow incomplete at submit,
+     go back to it rather than letting the browser block on a control the
+     person cannot see. */
+  form.addEventListener('submit', function (e) {
+    for (var i = 0; i < steps.length; i++) {
+      if (!steps[i].querySelectorAll(':invalid').length) { continue; }
+      e.preventDefault();
+      at = i;
+      render();
+      validate(steps[i]);
+      return;
+    }
+  });
+
+  render();
+});
 
 /* success-state: show a top banner if ?posted= is present */
 const u = new URL(location.href);
