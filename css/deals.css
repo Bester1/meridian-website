@@ -347,6 +347,17 @@
   border:0; padding:0; margin:0;
   display:grid; gap:1.15rem;
 }
+/* `hidden` is only a UA-stylesheet `display:none`, so ANY author `display`
+   silently beats it -- the script set .hidden on steps two and three and the
+   browser carried on showing them, which is how the wizard shipped looking
+   exactly like the wall it replaced. Restate it here, and for the marks and
+   nav, which are hidden in the markup for the no-JS case. */
+.wiz-step[hidden],
+.wiz-marks[hidden],
+.wiz-nav[hidden],
+.wiz-back[hidden],
+.wiz-next[hidden],
+.frm-actions[hidden]{ display:none !important }
 .wiz-step > legend{
   font-family:var(--display);
   font-weight:400;
