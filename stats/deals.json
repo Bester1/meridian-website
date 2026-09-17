@@ -1,6 +1,6 @@
 {
   "note": "Counters shown on /deals. Written by ingest_deals.py from enquiries/list.json and leads/carriers_operational.json, never by hand. A figure absent or zero here renders as nothing on the page rather than as a number we cannot stand behind.",
-  "updated": "2026-09-17T12:00:05+00:00",
+  "updated": "2026-09-17T12:15:05+00:00",
   "open_loads": 0,
   "in_bidding": 0,
   "booked_this_week": 0,
