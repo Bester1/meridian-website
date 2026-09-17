@@ -225,9 +225,21 @@ p{ margin-bottom:1.15rem; max-width:var(--measure) }
 /* --------------------------------------------------------------------------
    Sections and bands
    -------------------------------------------------------------------------- */
-.inner{ max-width:var(--wide); margin-inline:auto; padding-inline:clamp(20px,5vw,56px) }
-.section{ padding-block:clamp(3.2rem,7vw,5.2rem) }
+/* Most sections on these pages hold their content directly; only a few wrap it
+   in .inner. So the measure and the side gutter live on the section itself, and
+   a nested .inner just centres within it rather than padding again. Putting the
+   gutter only on .inner left every other section running to the window edge. */
+.section{
+  max-width:var(--wide);
+  margin-inline:auto;
+  padding:clamp(3.2rem,7vw,5.2rem) clamp(20px,5vw,56px);
+}
+.section.tight{ padding-block:clamp(2.4rem,5vw,3.4rem) }
 .section + .section{ border-top:1px solid var(--rule) }
+
+/* Full-bleed bands: the colour runs edge to edge, the type does not. */
+.band, .strip{ padding-inline:clamp(20px,5vw,56px) }
+.band > *, .strip > *{ max-width:var(--wide); margin-inline:auto }
 .band{
   background:var(--ink-deep); color:var(--sheet);
   padding-block:clamp(3.2rem,7vw,5.2rem);
@@ -236,6 +248,11 @@ p{ margin-bottom:1.15rem; max-width:var(--measure) }
 .band h1, .band h2, .band h3{ color:var(--sheet) }
 .band p{ color:#CFC7B6 }
 .strip{ background:var(--paper-warm); padding-block:clamp(2.6rem,6vw,4.2rem) }
+
+/* .inner inside an already-padded section must not pad a second time. */
+.inner{ max-width:var(--wide); margin-inline:auto }
+.section > .inner, .band > .inner, .strip > .inner{ padding-inline:0 }
+.page-hero > .inner, .rates-hero > .inner{ padding-inline:clamp(20px,5vw,56px) }
 
 /* --------------------------------------------------------------------------
    The two desks. Were rounded cards with an accent rail; now two columns
@@ -309,7 +326,14 @@ p{ margin-bottom:1.15rem; max-width:var(--measure) }
   color:var(--oxblood);
   font-variant-numeric:lining-nums;
   padding-top:.12rem;
+  /* Pin the numeral to the narrow column. Without this, auto-placement puts
+     the numeral in column one, the heading in column two, and then wraps the
+     paragraph back into column one -- which is 3.2rem wide, so the body text
+     sets one word per line. */
+  grid-column:1;
+  grid-row:1;
 }
+.step h3, .step p{ grid-column:2; }
 .step h3{ margin-bottom:.3rem; font-size:1.08rem }
 .step p{ margin:0; color:var(--ink-soft); font-size:.97rem }
 .band .step{ border-color:#3A352C }
@@ -317,6 +341,44 @@ p{ margin-bottom:1.15rem; max-width:var(--measure) }
 .band .step::before{ color:var(--oxblood-pale) }
 
 .num{ font-family:var(--serif); font-variant-numeric:lining-nums tabular-nums }
+
+/* --------------------------------------------------------------------------
+   Tables. A rate table is a printed table: rules between rows, no fill, no
+   rounded box. The wrapper scrolls on its own so a wide table never widens the
+   page -- dropping that in the rewrite is what pushed every section off to the
+   right, because the table forced the document wider than the window.
+   -------------------------------------------------------------------------- */
+.table-wrap{
+  overflow-x:auto;
+  margin-top:1.9rem;
+  border-top:1px solid var(--rule-firm);
+  border-bottom:1px solid var(--rule-firm);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.94rem;
+  min-width:34rem;              /* below this the columns stop being readable */
+}
+th{
+  text-align:left;
+  padding:.85rem 1.2rem .85rem 0;
+  font-family:var(--grotesk);
+  font-size:.62rem; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--quiet);
+  border-bottom:1px solid var(--rule-firm);
+  white-space:nowrap;
+}
+td{
+  padding:.8rem 1.2rem .8rem 0;
+  border-bottom:1px solid var(--rule);
+  color:var(--ink-soft);
+  vertical-align:top;
+}
+tr:last-child td{ border-bottom:0 }
+td b{ color:var(--ink); font-weight:700 }
+td:last-child, th:last-child{ padding-right:0 }
 
 /* --------------------------------------------------------------------------
    Notes and fine print

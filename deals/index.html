@@ -40,24 +40,20 @@
 
     <div class="deals-pulse">
       <div class="pulse-cell">
-        <div class="pulse-num" id="pulse-live">—</div>
+        <div class="pulse-num" id="pulse-live">&mdash;</div>
         <div class="pulse-label"><span class="pulse-live"></span>Open loads right now</div>
       </div>
       <div class="pulse-cell">
-        <div class="pulse-num" id="pulse-bidding">—</div>
+        <div class="pulse-num" id="pulse-bidding">&mdash;</div>
         <div class="pulse-label">In bidding</div>
       </div>
       <div class="pulse-cell">
-        <div class="pulse-num" id="pulse-bk">—</div>
+        <div class="pulse-num" id="pulse-bk">&mdash;</div>
         <div class="pulse-label">Booked this week</div>
       </div>
       <div class="pulse-cell">
-        <div class="pulse-num" id="pulse-carriers">2,148</div>
-        <div class="pulse-label">Carrier pool</div>
-      </div>
-      <div class="pulse-cell">
-        <div class="pulse-num" id="pulse-corridors">75</div>
-        <div class="pulse-label">SADC hubs</div>
+        <div class="pulse-num" id="pulse-carriers">&mdash;</div>
+        <div class="pulse-label">Carriers on file</div>
       </div>
     </div>
   </div>
@@ -163,7 +159,7 @@
       </div>
 
       <div class="frm-actions">
-        <button type="submit" class="btn amber">Post the load</button>
+        <button type="submit" class="btn">Post the load</button>
         <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20load%20to%20move" target="_blank" rel="noopener">or WhatsApp</a>
       </div>
       <p class="frm-status" id="shipper-status"></p>
@@ -241,7 +237,7 @@
       </div>
 
       <div class="frm-actions">
-        <button type="submit" class="btn amber">Apply to the pool</button>
+        <button type="submit" class="btn">Apply to the pool</button>
         <a class="whatsapp" href="https://wa.me/?text=Hi%20Meridian%20%2B%20I%20have%20a%20truck%20to%20register" target="_blank" rel="noopener">or WhatsApp</a>
       </div>
       <p class="frm-status" id="carrier-status"></p>
@@ -253,50 +249,65 @@
 <section class="deals-live">
   <div class="inner">
     <h3><span class="pulse-live"></span>Recent bookings</h3>
+    <!-- These five rows were written by hand and shipped as "last 5 booked
+         loads". Nothing in enquiries/list.json, leads/ or the call sheet
+         records any of them — no Bellville job, no Walvis Bay job, no
+         R 4,250, R 38,500 or R 12,800. Only the Alberton -> Harare line
+         has a real load behind it, and its rate was still being negotiated.
+         A page that invents its own track record is the one thing a broker
+         cannot recover from, so they are kept here rather than on screen.
+         The original markup, verbatim, if any of it turns out to be real:
+
+         <div class="deals-list" id="recent-deals">
+         <div class="deal-row">
+         <span class="status BOOKED">BOOKED</span>
+         <span class="lane">Cape Town → Bellville<small>30t building materials · tautliner</small></span>
+         <span class="rate">R 4,250</span>
+         <span class="when">Today, 09:14</span>
+         <span class="when">WC domestic</span>
+         </div>
+         <div class="deal-row">
+         <span class="status INTRANSIT">IN TRANSIT</span>
+         <span class="lane">Alberton → Harare<small>34t bonded FMCG · superlink</small></span>
+         <span class="rate">R 60,000</span>
+         <span class="when">22 Sep</span>
+         <span class="when">SA → ZW x-border</span>
+         </div>
+         <div class="deal-row">
+         <span class="status DELIVERED">DELIVERED</span>
+         <span class="lane">JHB → Maputo<small>28t mining parts · tautliner</small></span>
+         <span class="rate">R 38,500</span>
+         <span class="when">2 days ago</span>
+         <span class="when">SA → MZ x-border</span>
+         </div>
+         <div class="deal-row">
+         <span class="status BOOKED">BOOKED</span>
+         <span class="lane">Durban → George<small>18t general cargo · tri-axle</small></span>
+         <span class="rate">R 18,200</span>
+         <span class="when">3 days ago</span>
+         <span class="when">Coastal EC</span>
+         </div>
+         <div class="deal-row">
+         <span class="status CLOSED">PAID</span>
+         <span class="lane">Walvis Bay → Windhoek<small>22t packaged fuels · tautliner</small></span>
+         <span class="rate">R 12,800</span>
+         <span class="when">5 days ago</span>
+         <span class="when">NA corridor</span>
+         </div>
+    -->
     <div class="deals-list" id="recent-deals">
-      <div class="deal-row">
-        <span class="status BOOKED">BOOKED</span>
-        <span class="lane">Cape Town → Bellville<small>30t building materials · tautliner</small></span>
-        <span class="rate">R 4,250</span>
-        <span class="when">Today, 09:14</span>
-        <span class="when">WC domestic</span>
-      </div>
-      <div class="deal-row">
-        <span class="status INTRANSIT">IN TRANSIT</span>
-        <span class="lane">Alberton → Harare<small>34t bonded FMCG · superlink</small></span>
-        <span class="rate">R 60,000</span>
-        <span class="when">22 Sep</span>
-        <span class="when">SA → ZW x-border</span>
-      </div>
-      <div class="deal-row">
-        <span class="status DELIVERED">DELIVERED</span>
-        <span class="lane">JHB → Maputo<small>28t mining parts · tautliner</small></span>
-        <span class="rate">R 38,500</span>
-        <span class="when">2 days ago</span>
-        <span class="when">SA → MZ x-border</span>
-      </div>
-      <div class="deal-row">
-        <span class="status BOOKED">BOOKED</span>
-        <span class="lane">Durban → George<small>18t general cargo · tri-axle</small></span>
-        <span class="rate">R 18,200</span>
-        <span class="when">3 days ago</span>
-        <span class="when">Coastal EC</span>
-      </div>
-      <div class="deal-row">
-        <span class="status CLOSED">PAID</span>
-        <span class="lane">Walvis Bay → Windhoek<small>22t packaged fuels · tautliner</small></span>
-        <span class="rate">R 12,800</span>
-        <span class="when">5 days ago</span>
-        <span class="when">NA corridor</span>
-      </div>
+      <p class="deals-empty">Closed loads are published here once the desk has a
+        run of them on the record. Nothing is listed yet — and an empty list is
+        the honest version of that.</p>
     </div>
-    <p class="deals-legend">Showing last 5 booked loads. Carriers + lane anonymised — read-only desk view.</p>
+    </div>
+    <p class="deals-legend">Carrier names withheld; lanes and rates shown as closed. Read-only desk view.</p>
   </div>
 </section>
 
 <!-- ============ HOW IT WORKS ============ -->
 <section class="flow">
-  <p class="eyebrow" style="font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-2);font-weight:800;">How it runs</p>
+  <p class="eyebrow">How it runs</p>
   <h2>What happens between the form and the truck rolling</h2>
   <p class="sub">Every load goes through the same five steps. Same desk, same rate-conf template, same PoD flow. The only thing that changes is the lane and the freight.</p>
 
@@ -367,45 +378,34 @@
 </footer>
 
 <script>
-/* live counter — fetch from /stats/deals.json once Netlify Functions wired (Phase 2)
-   for now, deterministic real numbers so the page never lies */
+/* Counters come from /stats/deals.json, which the desk writes. A key absent
+   or null there leaves the em-dash in place -- a figure we cannot stand
+   behind is shown as nothing, never as a zero. */
 fetch('/stats/deals.json', { cache: 'no-store' })
-  .then(function (r) { if (!r.ok) { throw new Error('no stats yet'); } return r; })
   .then(r => r.ok ? r.json() : null)
   .then(d => {
     if (!d) return;
-    const set = (id, v) => { const e = document.getElementById(id); if (e && v != null) e.textContent = v; };
-    set('pulse-live', d.open ?? '—');
-    set('pulse-bidding', d.bidding ?? '—');
-    set('pulse-bk', d.booked_week ?? '—');
-    set('pulse-carriers', d.carriers ?? '2,148');
-    set('pulse-corridors', d.hubs ?? '75');
+    const set = (id, v) => {
+      const e = document.getElementById(id);
+      /* A zero is left as the em-dash: an empty week is not something to
+         advertise, and saying nothing claims nothing. */
+      if (e && v) e.textContent = typeof v === 'number' ? v.toLocaleString('en-ZA') : v;
+    };
+    set('pulse-live', d.open_loads);
+    set('pulse-bidding', d.in_bidding);
+    set('pulse-bk', d.booked_this_week);
+    set('pulse-carriers', d.carriers_on_file);
   })
-  .catch(()=>{});
-
-/* Netlify Forms handles submissions natively — only async JS is for the live counter */
-fetch('/stats/deals.json', { cache: 'no-store' })
-  .then(function (r) { if (!r.ok) { throw new Error('no stats yet'); } return r; })
-  .then(r => r.ok ? r.json() : null)
-  .then(d => {
-    if (!d) return;
-    const set = (id, v) => { const e = document.getElementById(id); if (e && v != null) e.textContent = v; };
-    set('pulse-live', d.open ?? '—');
-    set('pulse-bidding', d.bidding ?? '—');
-    set('pulse-bk', d.booked_week ?? '—');
-    set('pulse-carriers', d.carriers ?? '2,148');
-    set('pulse-corridors', d.hubs ?? '75');
-  })
-  .catch(()=>{});
+  .catch(() => {});
 
 /* success-state: show a top banner if ?posted= is present */
 const u = new URL(location.href);
 if (u.searchParams.get('posted')) {
   const banner = document.createElement('div');
-  banner.style.cssText = 'background:#2e7d5b;color:#fff;text-align:center;padding:14px 20px;font-size:14.5px;font-weight:600;';
+  banner.style.cssText = 'background:#6E2B23;color:#F7F5EF;text-align:center;padding:15px 20px;font-family:"Libre Franklin",Arial,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;';
   banner.textContent = u.searchParams.get('posted') === 'shipper'
-    ? '✓ Load received. The desk will quote your shipment back within the hour.'
-    : '✓ Carrier application received. We\'ll be in touch with the vetting checklist.';
+    ? 'Load received \u2014 the desk will come back with a quote.'
+    : 'Application received \u2014 the vetting checklist follows by email.';
   document.body.prepend(banner);
 }
 </script>
